@@ -33,6 +33,17 @@ namespace Full_GRASP_And_SOLID.Library
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
+            Console.WriteLine($"Costo producion total: {this.GetProductionCost()}");
+        }
+        // Utilizo expert porque en Recipe tengo la informacion necesaria para realizar la operacion: step, tambien
+        // SRP Porque Recipe ya se encarga de los pasos de la produción 
+        private double GetProductionCost(){
+            double totalProductionCost = 0;
+                foreach (Step step in steps)
+                {
+                    totalProductionCost = totalProductionCost + (step.Quantity * step.Time * step.Equipment.HourlyCost ) + step.Input.UnitCost;
+                }
+            return totalProductionCost;
         }
     }
 }
